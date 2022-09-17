@@ -48,3 +48,14 @@ function show(){
 document.getElementById('add').addEventListener('click',add);
 /*this will keep the inputs displayed permanently on the screen */
 show();
+
+//click on the close button to hide the current list item
+var close=document.getElementsByClassName("remove");
+var i; 
+for(i=0;i<close.length;i++){
+  close[i].onclick=function(){
+    var div=this.parentElement;
+    div.style.display="none";
+  }
+}
+//^used a diff code from the one given on assignment
