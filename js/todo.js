@@ -43,6 +43,12 @@ function show(){
   html += '</ul>';
   /* this displays the task as a list */
   document.getElementById('todos').innerHTML=html;
+
+  /*This tells the browser how to display the todo array after an item has been removed */
+  var buttons=document.getElementsByClassName('remove');
+  for (var i=0;i<buttons.length;i++){
+    buttons[i].addEventListener('click',remove);
+  }
 }
 /*this displays the inputted task when the 'Add Item' button is clicked */
 document.getElementById('add').addEventListener('click',add);
@@ -50,12 +56,13 @@ document.getElementById('add').addEventListener('click',add);
 show();
 
 //click on the close button to hide the current list item
-var close=document.getElementsByClassName("remove");
-var i; 
-for(i=0;i<close.length;i++){
-  close[i].onclick=function(){
-    var div=this.parentElement;
-    div.style.display="none";
-  }
+function remove(){
+  var id=this.getAttribute('id');
+  var todos=get_todos();
+  todos.splice(id,1);
+  localStorage.setItem('todo',JSON.stringify(todos));
+  /*this looks in the show() how to display a removed item on the screen */
+  show();
+
+  return false;
 }
-//^used a diff code from the one given on assignment
